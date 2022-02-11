@@ -2,30 +2,21 @@ const Mongoose = require('mongoose')
 
 
 const paymentSchema = new Mongoose.Schema({
-    user_id: {
+    userID: {
         type: String,
         required: true
     },
-    name:{
+    paymentCode:{
+        type: String,
+        required: true,
+        unique:true
+    },
+    amount:{
         type: String,
         required: true
     },
-    email:{
-        type: String,
-        required: true
-    },
-    paymentID:{
-        type: String,
-        required: true
-    },
-    address:{
-        type: Object,
-        required: true
-    },
-
-    status:{
+    isTotallyPayed:{
         type: Boolean,
-        default: false
     }
 }, {
     timestamps: true

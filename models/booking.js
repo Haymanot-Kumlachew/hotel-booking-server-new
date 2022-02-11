@@ -11,6 +11,9 @@ const BookingSchema = new Schema({
         /*ref: 'User'*/
         //add required and set to true
     },
+    userEmail:{
+      type:String
+    },
     checkInDate:{
         type:Date,
         required:true
@@ -19,7 +22,6 @@ const BookingSchema = new Schema({
         type:Date,
         required:true
     },
-
     paymentID:{
         type:Schema.Types.ObjectId,
         ref:'Payment'
@@ -55,6 +57,12 @@ const BookingSchema = new Schema({
             required:true
         }
     }],
+    bookCode:{
+        type:String
+    },
+    paymentStatus:{
+        type:String
+    },
     isPast:{
         type:Boolean,
         required:true,
@@ -62,8 +70,6 @@ const BookingSchema = new Schema({
     }
 
 });
-
-
 
 const Booking = mongoose.model('bookings', BookingSchema);
 

@@ -1,6 +1,6 @@
 const Book = require('../models/booking')
 
-const bookingController = {
+const BookingController = {
     addReservation: async (req, res) => {
         const {
             userID, checkInDate, checkOutDate, paymentID,
@@ -49,7 +49,7 @@ const bookingController = {
             return  res.status(500).json({msg: e.message})
         }
     },
-    deleteReservation: async (req, res) => {
+    cancelReservation: async (req, res) => {
         const {userID, bookingId} = req.body
         try{
             const reservation = await Book.deleteOne({_id: bookingId})
@@ -94,4 +94,4 @@ const bookingController = {
     }
 }
 
-module.exports =  bookingController;
+module.exports =  BookingController;

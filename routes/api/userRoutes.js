@@ -11,7 +11,5 @@ router.get('/logout', auth, UserController.logout)
 router.put('/update_password',auth, UserController.updatePassword);
 router.get('/infor', auth,  UserController.getUser)
 //router.post('/list_all', auth, UserController.listAllUsers)
-//
-//
-//
+
 module.exports = router;

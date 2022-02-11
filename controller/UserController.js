@@ -2,11 +2,7 @@ const User = require('../models/user')
 const bcrypt = require ('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const cookieParser = require('cookie-parser')
-
-
 const UserController = {
-
     newUser: async(req, res) =>{
         try{
             const {
@@ -74,7 +70,6 @@ const UserController = {
             return  res.status(500).json({msg: e.message})
         }
 },
-
     login: async (req, res) => {
         try {
             const {email, password,} = req.body;
@@ -110,7 +105,6 @@ const UserController = {
                 return res.status(500).json({msg: err.message})
             }
     },
-
     //make updatePassword to receive old and new password and compare old password before changing it.
     //idea: if not the user has to use email verification and reset or change password
     logout: async (req, res) =>{
@@ -140,7 +134,6 @@ const UserController = {
                 return res.status(500).json({msg: err.message})
             }
     },
-
     getUser: async (req, res) =>{
         try {
             const user = await User.findById(req.user.id).select('-password')
@@ -151,7 +144,6 @@ const UserController = {
             return res.status(500).json({msg: err.message})
         }
     },
-
     refreshToken: (req, res) => {
         try {
             //Refresh token isn't working well
@@ -173,7 +165,6 @@ const UserController = {
             return res.status(500).json({msg: err.message})
         }
     },
-
 }
 const createAccessToken = (user) =>{
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1d'})

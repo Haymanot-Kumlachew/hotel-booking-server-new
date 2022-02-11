@@ -5,9 +5,10 @@ const User = require('./user');
 //const Payment = require('./Payment')
 
 const BookingSchema = new Schema({
-    bookerID: {
+    userID: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        required: true
+        /*ref: 'User'*/
         //add required and set to true
     },
     checkInDate:{
@@ -23,7 +24,7 @@ const BookingSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:'Payment'
     },
-    BookingInfo: [{
+    bookingInfo: [{
         "pax":[{
             name: {
                 type: String
@@ -44,6 +45,10 @@ const BookingSchema = new Schema({
         roomType: {
             type:String,
             required:true
+        },
+        roomID:{
+            type: Schema.Types.ObjectId,
+            required: true
         },
         roomAmount:{
             type:String,

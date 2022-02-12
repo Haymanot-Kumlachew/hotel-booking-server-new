@@ -49,8 +49,7 @@ const BookingSchema = new Schema({
             required:true
         },
         roomID:{
-            type: Schema.Types.ObjectId,
-            required: true
+            type: Schema.Types.ObjectId
         },
         roomAmount:{
             type:String,

@@ -20,7 +20,7 @@ const BookingController = {
             })
             await newReservation.save()
             if(newReservation){
-                res.status(200).json({msg:"Room booked successfully"})
+                res.status(200).json({msg:"Room booked successfully"+ newReservation._id})
             }
         }catch(e){
             return  res.status(500).json({msg: e.message})

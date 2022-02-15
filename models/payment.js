@@ -1,7 +1,8 @@
-const Mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 
-const paymentSchema = new Mongoose.Schema({
+const paymentSchema = new Schema({
     userID: {
         type: String,
         required: true

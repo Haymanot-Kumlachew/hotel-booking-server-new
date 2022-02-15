@@ -1,89 +1,50 @@
-const roomModel = require ('../model/room')
+const roomModel = require ('../models/room')
 
 //const router = require ('../routes/api/roomsRoute');
 
 
 const RoomsController ={
-    addPayment: async (req, res) => {
-        /*const {
-            //paymentCode
-            userID, checkInDate, checkOutDate, paymentID,
-            bookingInfo: [{pax:[{name, adultStatus, gender,age,}], roomType,roomID, roomAmount}],
-            /!*"results": [
-                {
-                    "po_number": "PO1001",
-                    "product_id": "PD1001",
-                    "message": "Exists",
-                    "timestamp": "2016-05-01"
-                }]*!/
-        } = req.body
-
+    addRoom: async (req, res) => {
+        const {name, RentPerDay, type, description, ImageUrls,currentBookings} = req.body;
         try{
-            const newReservation = new Payment ({userID, checkInDate, checkOutDate, paymentID,
-                bookingInfo: [{pax:[{name, adultStatus, gender,age,}], roomType,roomID, roomAmount}]
-            })
-            await newReservation.save()
-            if(newReservation){
+            const newRoom = new roomModel({name, RentPerDay, type, description, ImageUrls,currentBookings})
+            await newRoom.save()
+            if(newRoom){
                 res.status(200).json({msg:"Room booked successfully"})
             }
         }catch(e){
             return  res.status(500).json({msg: e.message})
-        }*/
+        }
     },
-    updatePayment: async (req, res) => {
-        /*const {userID, bookingId, checkInDate, checkOutDate, paymentID,
-            bookingInfo: [{pax:[{name, adultStatus, gender,age,}], roomType,roomID, roomAmount}],
-        } = req.body
-        //const {userID} = req.params;
-        //console.log("req-body: " + JSON.stringify(req.body));
-        try {
-            let reservation = await Book.findOneAndUpdate(
-                {_id: bookingId},
-                {$set: {
-                        checkInDate,
-                        checkOutDate,
-                        paymentID,
-                        bookingInfo:[{pax:[{name, adultStatus, gender,age,}], roomType,roomID,roomAmount}]
-                    }})
-            await reservation.save()
-            if (reservation) {
-                await res.status(200).json({msg: "update successful", reservation});
-            }
+    updateRoom: async (req, res) => {
+        const {name, RentPerDay, type, description, ImageUrls, roomId} = req.body;
+        try {const room = await Book.findOneAndUpdate(
+                {_id: roomId}, {$set: {name, RentPerDay, type, description, ImageUrls}})
+
+            await room.save()
+            if (room) { await res.status(200).json({msg: "update successful", room});}
         } catch(e){
             return  res.status(500).json({msg: e.message})
-        }*/
+        }
     },
-    deletePayment: async (req, res) => {
-        /*const {userID, bookingId} = req.body
+    deleteRoom: async (req, res) => {
+        const {roomId} = req.body
         try{
-            const reservation = await Book.deleteOne({_id: bookingId})
-            if (reservation) {
+            const room = await roomModel.deleteOne({_id: roomId})
+            if (room) {
                 await res.status(201).json("user successfully deleted");
             }
         } catch(e){
             return  res.status(500).json({msg: e.message})
-        }*/
+        }
     },
-    getA_Room: async (req, res)=>{
-        /*const {bookingId} = req.body
+    listAllRooms: async (req, res) => {
         try{
-            const reservation = await Book.findById(bookingId)
-            if(reservation)
-                return res.status(200).json({msg:"reservation" + reservation})
-            //res.json(user)
-        }
-        catch(e){
-            return  res.status(500).json({msg: e.message})
-        }*/
-    },
-    getRooms: async(req, res) => 
-    {
-        try {
             const rooms = await roomModel.find({})
-            return res.json({ rooms });
-        }catch (error) {
-            return res.status(400).json({ message: error });
+            await res.status(201).json({rooms})
+        }  catch(e){
+            return  res.status(500).json({msg: e.message})
         }
-    },
+    }
 }
 module.exports =  RoomsController;

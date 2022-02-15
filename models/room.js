@@ -23,7 +23,11 @@ const roomSchema = Mongoose.Schema({
     //timestamps : true,
     ImageUrls : [],
     currentBookings :[]
-})
+},
+    {
+        timestamps: true
+    }
+)
 
 const roomModel = Mongoose.model('rooms', roomSchema)
 
